@@ -86,7 +86,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "skymarket.wsgi.application"
 
-# TODO здесь мы настраиваем аутентификацию и пагинацию
+# Здесь мы настраиваем аутентификацию и пагинацию
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
@@ -102,11 +102,10 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
 }
-# TODO здесь мы настраиваем Djoser
+# Настройки Djoser
 DJOSER = {
     'SERIALIZERS': {
         'user_create': 'users.serializers.UserRegistrationSerializer',
-        # 'user': 'djoser.serializers.UserSerializer',
         'user': 'users.serializers.CurrentUserSerializer',
         'current_user': 'users.serializers.CurrentUserSerializer',
     },
