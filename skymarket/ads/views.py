@@ -25,12 +25,10 @@ class AdViewSet(viewsets.ModelViewSet):
     filterset_class = AdFilter
 
     def get_permissions(self):
-        if self.action == "create":
+        if self.action in ["create", "update", "partial_update", "destroy"]:
             permission_classes = [IsAuthenticated, IsOwnerOrRoles]
-        elif self.action in ["update", "partial_update"]:
-            permission_classes = [IsAuthenticated, IsOwnerOrRoles]
-        elif self.action == "destroy":
-            permission_classes = [IsAuthenticated, IsOwnerOrRoles]
+        elif self.action == "retrieve":
+            permission_classes = [IsAuthenticated]
         else:
             permission_classes = [AllowAny]
         return [permission() for permission in permission_classes]
@@ -49,8 +47,7 @@ class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
 
     def get_permissions(self):
-        if self.action == 'create' or self.action == 'update' \
-                or self.action == 'partial_update' or self.action == 'destroy':
+        if self.action in ["create", "update", "partial_update", "destroy"]:
             permission_classes = [IsAuthenticated, IsOwnerOrRoles]
         else:
             permission_classes = [IsAuthenticated]
